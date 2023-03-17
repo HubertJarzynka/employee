@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  mysql_db:
+    container_name: mysqldb
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: food_docker
+      MYSQL_USER: testapp
+      MYSQL_PASSWORD: 12345678
+
+
+  employee:
+    container_name: employeeapp
+    image: employeeapp:latest
+    build: ./
+    ports:
+      - "5005:5005"
+      - "8080:8080"
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005

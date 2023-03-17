@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: testapp
+    url: jdbc:mysql://localhost:3306/food_docker?serverTimezone=Europe/Warsaw&useSSL=False&allowPublicKeyRetrieval=true
+    password: '12345678'
+    consumer.group-id: group-id
+jpa:
+  database-platform: org.hibernate.dialect.MySQL8Dialect
+  hibernate:
+    ddl-auto: update
+kafka:
+  producer:
+    bootstrap-address: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    command-topic: Kafka_Example
+  consumer:
+    bootstrap-address: localhost:9092
+    group-id: myGroupId
+    auto-offset-reset: earliest
+    key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
